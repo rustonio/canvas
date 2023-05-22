@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: 900px auto;
+            grid-gap: 5px;
+        }
+        canvas {
+            background: white;
+            border: 1px dashed black;
+            box-sizing: content-box;
+        }
+        .settings {
+            border: 1px solid bisque;
+            padding: 5px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            max-height: 95vh;
+        }
+        .left {
+            grid-column: 1;
+            display: grid;
+            grid-template-rows: repeat(6,1fr);
+            max-height: 85vh;
+        }
+        .right {
+            grid-column: 2;
+            display: grid;
+            grid-template-rows: repeat(6,1fr);
+            max-height: 85vh;
+        }
+        .bottom {
+            grid-column: span 2;
+        }
+        .hidden {
+            display: none;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        input[type='checkbox'] {
+            width: 50px;
+            height: 50px;
+        }
+        input:invalid {
+            background: red;
+            color: white;
+        }
+        .message {
+            font-size: 0.9rem;
+            color: #d2d211;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="900" height="900">
+
+    </canvas>
+    <div class="settings">
+        <div class="left">
+            <div>
+                <h4>Введите число углов у многоугольника:</h4>
+                <input type="number" name="angle_count" id="angle_count" min="3" max="360" value="3" required>
+            </div>
+            <div>
+                <h4>Введите количество точек на рисунке:</h4>
+                <input type="number" name="point_count" id="point_count" min="1000" max="999999" value="20000" required>
+                <p class="message"></p>
+            </div>
+            <div>
+                <h4>Введите отношение в одном из форматов <i>n/m</i>,<i>n\m</i>,<i>n\m</i> (только однозначные числа):
+                </h4>
+                <input type="text" name="ratio" id="ratio" pattern="\d[\/\\\|]\d" value="1/1" required>
+            </div>
+
+            <div>
+                <h4>Выберите цвет фигуры</h4>
+                <input type="color" name="shape_color" id="shape_color">
+                <input type="color" name="shape_color2" id="shape_color2" class="hidden">
+            </div>
+
+            <div>
+                <h4>Выберите цвет точек</h4>
+                <input type="color" name="point_color" id="point_color" value="#FF0000">
+            </div>
+
+            <div>
+                <h4>Выберите размер точек</h4>
+                <p>Ширина</p>
+                <input type="number" name="point_width" id="point_width" max="20" min="1" value="1" required>
+                <p>Высота</p>
+                <input type="number" name="point_height" id="point_height" max="20" min="1" value="1" required>
+            </div>
+        </div>
+        <div class="right">
+            <div>
+                <p>указать свои точки</p>
+                <input type="checkbox" name="isCustom" id="isCustom">
+            </div>
+            <div></div>
+            <div></div>
+            <div>
+                <p>указать градиент(два цвета)</p>
+                <input type="checkbox" name="isGradient" id="isGradient">
+            </div>
+            <div>
+                <p>Случайный цвет для каждой точки</p>
+                <input type="checkbox" name="isPointGradient" id="isPointGradient">
+            </div>
+            <div>
+                <h4>Мгновенное появление</h4>
+                <input type="checkbox" name="isInstant" id="isInstant">
+            </div>
+        </div>
+        <div class="bottom">
+            <button type="submit">Начать</button>
+            <button type="submit" id="clear_button">Очистить</button>
+        </div>
+
+        <details class="bottom">
+            <summary>Про соотношения</summary>
+            <span>
+                Если первое число в соотношении больше второго, то в некоторых случаях красивый рисунок может не получиться
+            </span>
+        </details>
+
+    </div>
+    <script src="canvas.js"></script>
+</body>
+</html>
